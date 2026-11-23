@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#142638">
+  <meta name="description" content="A simple personal inventory and sales manager.">
+  <title>StockPilot</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="StockPilot home" data-page="dashboard">
+        <span class="brand-mark">S</span>
+        <span>StockPilot</span>
+      </a>
+      <button class="icon-button" id="backupButton" aria-label="Backup information" title="Backup information">⇧</button>
+    </header>
+
+    <main id="mainContent" tabindex="-1">
+      <section class="page active" id="page-dashboard">
+        <div class="page-heading">
+          <div><p class="eyebrow">YOUR BUSINESS AT A GLANCE</p><h1>Dashboard</h1></div>
+          <span class="date-pill" id="todayLabel"></span>
+        </div>
+        <div class="welcome-card">
+          <div>
+            <p class="muted-on-dark">WELCOME TO YOUR INVENTORY</p>
+            <h2>Good business starts with clarity.</h2>
+            <p class="muted-on-dark small">Your stock, sales and customer accounts in one place.</p>
+          </div>
+          <div class="welcome-icon">▦</div>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><span class="stat-icon green">▣</span><span class="stat-label">Products</span><strong id="productCount">0</strong><small>In your catalog</small></article>
+          <article class="stat-card"><span class="stat-icon blue">↗</span><span class="stat-label">Stock units</span><strong id="stockUnits">0</strong><small>Total quantity</small></article>
+          <article class="stat-card"><span class="stat-icon amber">!</span><span class="stat-label">Low stock</span><strong id="lowStockCount">0</strong><small>Need attention</small></article>
+          <article class="stat-card"><span class="stat-icon purple">◉</span><span class="stat-label">Customers</span><strong id="customerCount">0</strong><small>In your book</small></article>
+        </div>
+        <div class="section-heading"><div><p class="eyebrow">GET STARTED</p><h2>Quick actions</h2></div></div>
+        <div class="quick-grid">
+          <button class="quick-action" data-go="stock"><span class="quick-icon">＋</span><span><b>Add products</b><small>Build your catalog</small></span><span class="arrow">›</span></button>
+          <button class="quick-action" data-go="customers"><span class="quick-icon customer">♙</span><span><b>Add customer</b><small>Start your customer book</small></span><span class="arrow">›</span></button>
+          <button class="quick-action" data-go="sales"><span class="quick-icon sale">↗</span><span><b>Record a sale</b><small>Coming in Stage 4</small></span><span class="arrow">›</span></button>
+          <button class="quick-action" data-go="purchases"><span class="quick-icon purchase">▤</span><span><b>Record a purchase</b><small>Coming in Stage 6</small></span><span class="arrow">›</span></button>
+        </div>
+        <div class="section-heading"><div><p class="eyebrow">ACTIVITY</p><h2>Recent activity</h2></div></div>
+        <div class="empty-card"><div class="empty-symbol">◷</div><b>No activity yet</b><p>Your stock and business activity will appear here as you use StockPilot.</p></div>
+        <p class="privacy-note">Your data is stored on this device in this first version. Make regular backups once backup tools are added.</p>
+      </section>
+
+      <section class="page" id="page-stock">
+        <div class="page-heading"><div><p class="eyebrow">PRODUCT CATALOG</p><h1>Stock</h1></div><button class="primary-button" id="addProductBtn">＋ Add product</button></div>
+        <div class="search-wrap"><span>⌕</span><input id="productSearch" type="search" placeholder="Search products..." autocomplete="off"></div>
+        <div class="filter-row"><button class="filter-chip selected" data-filter="all">All products</button><button class="filter-chip" data-filter="low">Low stock</button></div>
+        <div id="productList" class="list-stack"></div>
+        <p class="privacy-note">Product creation and stock editing will be enabled in the next build stage.</p>
+      </section>
+
+      <section class="page" id="page-sales">
+        <div class="page-heading"><div><p class="eyebrow">TRANSACTIONS</p><h1>Sales</h1></div></div>
+        <div class="feature-card"><div class="feature-icon">↗</div><h2>Sales are coming next</h2><p>We'll add cash sales, credit sales, partial payments, automatic stock deduction and digital receipts after the product and customer foundations are ready.</p><span class="stage-tag">PLANNED · STAGE 4–5</span></div>
+      </section>
+
+      <section class="page" id="page-customers">
+        <div class="page-heading"><div><p class="eyebrow">CUSTOMER ACCOUNTS</p><h1>Customers</h1></div><button class="primary-button" id="addCustomerBtn">＋ Add customer</button></div>
+        <div class="search-wrap"><span>⌕</span><input id="customerSearch" type="search" placeholder="Search customers..." autocomplete="off"></div>
+        <div id="customerList" class="list-stack"></div>
+        <p class="privacy-note">Customer profiles are being built in Stage 3. Debt and payment tracking will follow.</p>
+      </section>
+
+      <section class="page" id="page-purchases">
+        <div class="page-heading"><div><p class="eyebrow">STOCK INCOMING</p><h1>Purchases</h1></div></div>
+        <div class="feature-card"><div class="feature-icon">▤</div><h2>Purchases and suppliers</h2><p>Record supplier purchases and increase stock automatically. Supplier profiles and purchase history are planned for Stage 6.</p><span class="stage-tag">PLANNED · STAGE 6</span></div>
+      </section>
+
+      <section class="page" id="page-reports">
+        <div class="page-heading"><div><p class="eyebrow">BUSINESS PERFORMANCE</p><h1>Reports</h1></div></div>
+        <div class="feature-card"><div class="feature-icon">▥</div><h2>Your business insights</h2><p>Sales summaries, gross profit estimates, inventory valuation and customer debt reports will become available as we build the transaction features.</p><span class="stage-tag">PLANNED · STAGE 7</span></div>
+      </section>
+
+      <section class="page" id="page-more">
+        <div class="page-heading"><div><p class="eyebrow">PREFERENCES & TOOLS</p><h1>More</h1></div></div>
+        <div class="settings-list">
+          <div class="setting-row"><span class="setting-icon">◈</span><span><b>Currency</b><small>Mauritanian ouguiya (MRU)</small></span><span class="setting-value">MRU</span></div>
+          <div class="setting-row"><span class="setting-icon">▣</span><span><b>Data storage</b><small>On this device</small></span><span class="setting-value">Local</span></div>
+          <div class="setting-row"><span class="setting-icon">⇧</span><span><b>Backup & restore</b><small>Planned for Stage 8</small></span><span class="setting-value">Soon</span></div>
+          <div class="setting-row"><span class="setting-icon">⚙</span><span><b>App version</b><small>StockPilot foundation</small></span><span class="setting-value">0.1</span></div>
+        </div>
+        <div class="note-card"><b>Keep your records safe</b><p>Until backup and restore are implemented, avoid clearing Safari website data for StockPilot. That could remove locally stored information.</p></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="nav-item active" data-page="dashboard"><span>⌂</span><small>Home</small></button>
+      <button class="nav-item" data-page="stock"><span>▣</span><small>Stock</small></button>
+      <button class="nav-item" data-page="sales"><span>↗</span><small>Sales</small></button>
+      <button class="nav-item" data-page="customers"><span>♙</span><small>Customers</small></button>
+      <button class="nav-item" data-page="more"><span>•••</span><small>More</small></button>
+    </nav>
+  </div>
+
+  <dialog id="infoDialog" class="modal">
+    <div class="modal-header"><div><p class="eyebrow">STOCKPILOT</p><h2 id="dialogTitle">Information</h2></div><button class="close-button" id="closeDialog" aria-label="Close">×</button></div>
+    <p id="dialogMessage"></p>
+    <button class="primary-button full" id="dialogOk">Got it</button>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>
